@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="item1">
+        <div class="search">
+          <form action="/" method="POST" style="display: flex; gap: 10px">
+            <input
+              type="text"
+              name="city"
+              placeholder="Enter a city"
+              required
+            />
+            <button type="submit">Search</button>
+          </form>
+          <hr />
+          <div class="sub-container">
+            <div class="i1">
+              <a href="">
+                <img
+                  src="{{ url_for('static', filename='images/newyork.jpeg') }}"
+                  alt=""
+                  height="90px"
+                  width="90px"
+                />
+              </a>
+            </div>
+            <div class="i1">
+              <a href="">
+                <img
+                  src="{{ url_for('static', filename='images/newyork.jpeg') }}"
+                  alt=""
+                  height="90px"
+                  width="90px"
+                />
+              </a>
+            </div>
+            <div class="i1">
+              <a href="">
+                <img
+                  src="{{ url_for('static', filename='images/newyork.jpeg') }}"
+                  alt=""
+                  height="90px"
+                  width="90px"
+                />
+              </a>
+            </div>
+            <div class="i1">
+              <a href="">
+                <img
+                  src="{{ url_for('static', filename='images/newyork.jpeg') }}"
+                  alt=""
+                  height="90px"
+                  width="90px"
+                />
+              </a>
+            </div>
+            <div class="i1">
+              <a href="">
+                <img
+                  src="{{ url_for('static', filename='images/newyork.jpeg') }}"
+                  alt=""
+                  height="90px"
+                  width="90px"
+                />
+              </a>
+            </div>
+            <div class="i1">
+              <a href="">
+                <img
+                  src="{{ url_for('static', filename='images/newyork.jpeg') }}"
+                  alt=""
+                  height="90px"
+                  width="90px"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="item2">
+        <div class="subitem1">
+          <div class="city-info">
+            <div class="temperature">
+              <h2>{{ data['current']['temp_c'] }} °C</h2>
+            </div>
+            <div class="date-time">
+              <h2>{{ data['location']['localtime'][:10] }}</h2>
+              <h2>{{ data['location']['localtime'][10:] }}</h2>
+            </div>
+            <div class="location">
+              <h2>{{ data['location']['region'] }}</h2>
+              <h2>{{ data['location']['country'] }}</h2>
+            </div>
+          </div>
+        </div>
+        <div class="subitem2">
+          <div class="subsubitem">
+            <div class="inner">
+              <h4 style="background-color: aqua">Atmospheric conditions</h4>
+              <p class="wind-speed">
+                wind {{ data['current']['wind_kph'] }}Kph ({{
+                data['current']['wind_dir'] }})
+              </p>
+              <p class="pressure">
+                pressure {{ data['current']['pressure_in'] }}
+              </p>
+              <p class="humidity">humidity {{ data['current']['humidity'] }}</p>
+              <p class="visibility">
+                visibility {{ data['current']['vis_km'] }}Kph
+              </p>
+            </div>
+          </div>
+          <div class="subsubitem">
+            <div class="inner">
+              <h4 style="background-color: aquamarine">Additional details</h4>
+              <p class="uv-index">uv-index {{ data['current']['uv'] }}</p>
+              <p class="precipitation">
+                precip {{ data['current']['precip_in'] }}
+              </p>
+              <p class="humidity">humidity {{ data['current']['humidity'] }}</p>
+            </div>
+          </div>
+          <div class="subsubitem">
+            <div class="inner">
+              <h4 style="background-color: coral">Current Weather</h4>
+              <p class="temp">temperature {{ data['current']['temp_c'] }}</p>
+              <p class="Weather_condition">
+                weather {{ data['current']['condition']['text'] }}
+              </p>
+              <p class="feelsliketemp">
+                feelslike {{ data['current']['feelslike_c'] }} °C
+              </p>
+            </div>
+          </div>
+          <div class="subsubitem">
+            <div class="inner">
+              <h3 style="background-color: cornflowerblue">wind</h3>
+              <p class="wind-speed">{{ data['current']['wind_kph'] }}Kph</p>
+            </div>
+          </div>
+          <div class="subsubitem">
+            <div class="inner">
+              <h3 style="background-color: indianred">wind</h3>
+              <p class="wind-speed">{{ data['current']['wind_kph'] }}Kph</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

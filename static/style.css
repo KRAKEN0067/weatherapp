@@ -1,0 +1,138 @@
+body {
+  /* Set a max-width to prevent excessive stretching */
+  margin: 10px;
+  min-width: 1000px;
+
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  grid-template-rows: 800px;
+
+  .item1 {
+    background-color: rgb(120, 120, 120);
+    border-radius: 10px;
+    min-width: 10%;
+
+    .search {
+      text-align: center;
+      padding-top: 25px;
+      justify-items: center;
+      justify-content: center;
+    }
+    .search input {
+      width: 180px;
+      height: 30px;
+      border: none;
+      border-radius: 5px;
+    }
+    .search button {
+      height: 33px;
+      border: none;
+      border-radius: 5px;
+    }
+  }
+  .item2 {
+    background-color: rgb(60, 60, 60);
+    background-image: url(../static/images/france.jpg);
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    display: grid;
+    grid-template-rows: 65% 35%;
+    min-width: 100%;
+  }
+}
+
+.subitem2 {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+}
+
+.city-info {
+  color: white;
+  text-align: right;
+  padding-right: 10px;
+  text-shadow: 
+        -2px -2px 0 black,  
+         2px -2px 0 black,
+        -2px  2px 0 black,
+         2px  2px 0 black;
+
+}
+.temperature {
+  font-size: 50px;
+  gap: 0;
+  padding: 0%;
+}
+.date-time {
+  gap: 0;
+  padding: 0;
+}
+
+.subsubitem {
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.inner {
+  width: 100%;
+  height: 100%;
+  background-color: rgb(255, 255, 255, 0.6);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.sub-container{
+  display: grid;
+  grid-template-columns: 100px 100px 100px;
+  grid-template-rows: 100px 100px;
+  text-align: center;
+  padding-top: 500px;
+  border-radius: 10px;
+  gap: 10px;
+}
+.i1{
+  
+  img{
+    border-radius: 10px;
+  }
+}
+
+.i1 {
+  font-size: 2rem;
+  color: #ffffff;
+  position: relative;
+  display: inline-block;
+}
+
+.i1::after,
+.i1::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, #ff0000, #00ffff);
+  bottom: -5px;
+  left: 0;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s ease-out;
+}
+
+.i1::before {
+  top: -5px;
+  transform-origin: left;
+}
+
+.i1:hover::after,
+.i1:hover::before {
+  transform: scaleX(1);
+}
