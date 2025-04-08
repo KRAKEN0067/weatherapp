@@ -3,156 +3,88 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Weather Dashboard</title>
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='style.css') }}"
     />
   </head>
   <body>
+    {% if error %}
+    <div class="error-message">
+      <p>{{ error }}</p>
+    </div>
+    {% endif %}
+
     <div class="container">
+      <!-- Search -->
       <div class="item1">
-        <div class="search">
-          <form action="/" method="POST" style="display: flex; gap: 10px">
-            <input
-              type="text"
-              name="city"
-              placeholder="Enter a city"
-              required
-            />
-            <button type="submit">Search</button>
-          </form>
-          <hr />
-          <div class="sub-container">
-            <div class="i1">
-              <a href="">
-                <img
-                  src="{{ url_for('static', filename='images/newyork.jpeg') }}"
-                  alt=""
-                  height="90px"
-                  width="90px"
-                />
-              </a>
-            </div>
-            <div class="i1">
-              <a href="">
-                <img
-                  src="{{ url_for('static', filename='images/newyork.jpeg') }}"
-                  alt=""
-                  height="90px"
-                  width="90px"
-                />
-              </a>
-            </div>
-            <div class="i1">
-              <a href="">
-                <img
-                  src="{{ url_for('static', filename='images/newyork.jpeg') }}"
-                  alt=""
-                  height="90px"
-                  width="90px"
-                />
-              </a>
-            </div>
-            <div class="i1">
-              <a href="">
-                <img
-                  src="{{ url_for('static', filename='images/newyork.jpeg') }}"
-                  alt=""
-                  height="90px"
-                  width="90px"
-                />
-              </a>
-            </div>
-            <div class="i1">
-              <a href="">
-                <img
-                  src="{{ url_for('static', filename='images/newyork.jpeg') }}"
-                  alt=""
-                  height="90px"
-                  width="90px"
-                />
-              </a>
-            </div>
-            <div class="i1">
-              <a href="">
-                <img
-                  src="{{ url_for('static', filename='images/newyork.jpeg') }}"
-                  alt=""
-                  height="90px"
-                  width="90px"
-                />
-              </a>
-            </div>
-          </div>
-        </div>
+        <form action="/" method="POST" class="search">
+          <input type="text" name="city" placeholder="Enter a city" required />
+          <button type="submit">Search</button>
+        </form>
       </div>
+
+      <!-- Weather Info -->
       <div class="item2">
-        <div class="subitem1">
-          <div class="city-info">
-            <div class="temperature">
-              <h2>{{ data['current']['temp_c'] }} °C</h2>
-            </div>
-            <div class="date-time">
-              <h2>{{ data['location']['localtime'][:10] }}</h2>
-              <h2>{{ data['location']['localtime'][10:] }}</h2>
-            </div>
-            <div class="location">
-              <h2>{{ data['location']['region'] }}</h2>
-              <h2>{{ data['location']['country'] }}</h2>
-            </div>
+        <div class="city-info">
+          <h2>
+            {{ data['location']['name'] }}, {{ data['location']['region'] }}
+          </h2>
+          <h3>{{ data['location']['country'] }}</h3>
+          <p>{{ data['location']['localtime'] }}</p>
+        </div>
+
+        <div class="current-weather">
+          <div class="weather-icon">
+            <img
+              src="https:{{ data['current']['condition']['icon'] }}"
+              alt="{{ data['current']['condition']['text'] }}"
+            />
+            <p>{{ data['current']['condition']['text'] }}</p>
+          </div>
+          <div class="temperature">
+            <h1>{{ data['current']['temp_c'] }}°C</h1>
+            <p>Feels like {{ data['current']['feelslike_c'] }}°C</p>
+            <p>Humidity: {{ data['current']['humidity'] }}%</p>
+            <p>UV Index: {{ data['current']['uv'] }}</p>
           </div>
         </div>
-        <div class="subitem2">
-          <div class="subsubitem">
-            <div class="inner">
-              <h4 style="background-color: aqua">Atmospheric conditions</h4>
-              <p class="wind-speed">
-                wind {{ data['current']['wind_kph'] }}Kph ({{
-                data['current']['wind_dir'] }})
-              </p>
-              <p class="pressure">
-                pressure {{ data['current']['pressure_in'] }}
-              </p>
-              <p class="humidity">humidity {{ data['current']['humidity'] }}</p>
-              <p class="visibility">
-                visibility {{ data['current']['vis_km'] }}Kph
-              </p>
-            </div>
+
+        <!-- Additional Stats -->
+        <div class="weather-stats">
+          <div class="stat-box">
+            <h4>Wind</h4>
+            <p>
+              {{ data['current']['wind_kph'] }} kph ({{
+              data['current']['wind_dir'] }})
+            </p>
+            <p>Gusts: {{ data['current']['gust_kph'] }} kph</p>
           </div>
-          <div class="subsubitem">
-            <div class="inner">
-              <h4 style="background-color: aquamarine">Additional details</h4>
-              <p class="uv-index">uv-index {{ data['current']['uv'] }}</p>
-              <p class="precipitation">
-                precip {{ data['current']['precip_in'] }}
-              </p>
-              <p class="humidity">humidity {{ data['current']['humidity'] }}</p>
-            </div>
+
+          <div class="stat-box">
+            <h4>Visibility</h4>
+            <p>{{ data['current']['vis_km'] }} km</p>
           </div>
-          <div class="subsubitem">
-            <div class="inner">
-              <h4 style="background-color: coral">Current Weather</h4>
-              <p class="temp">temperature {{ data['current']['temp_c'] }}</p>
-              <p class="Weather_condition">
-                weather {{ data['current']['condition']['text'] }}
-              </p>
-              <p class="feelsliketemp">
-                feelslike {{ data['current']['feelslike_c'] }} °C
-              </p>
-            </div>
+
+          <div class="stat-box">
+            <h4>Pressure</h4>
+            <p>{{ data['current']['pressure_in'] }} in</p>
           </div>
-          <div class="subsubitem">
-            <div class="inner">
-              <h3 style="background-color: cornflowerblue">wind</h3>
-              <p class="wind-speed">{{ data['current']['wind_kph'] }}Kph</p>
-            </div>
+
+          <div class="stat-box">
+            <h4>Dew Point</h4>
+            <p>{{ data['current']['dewpoint_c'] }}°C</p>
           </div>
-          <div class="subsubitem">
-            <div class="inner">
-              <h3 style="background-color: indianred">wind</h3>
-              <p class="wind-speed">{{ data['current']['wind_kph'] }}Kph</p>
-            </div>
+
+          <div class="stat-box">
+            <h4>Wind Chill</h4>
+            <p>{{ data['current']['windchill_c'] }}°C</p>
+          </div>
+
+          <div class="stat-box">
+            <h4>Precipitation</h4>
+            <p>{{ data['current']['precip_mm'] }} mm</p>
           </div>
         </div>
       </div>

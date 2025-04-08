@@ -17,6 +17,30 @@ def get_weather():
         response = requests.get(url)
         weather_data = response.json()
         return render_template('index.html', data=weather_data)
+'''
+@app.route("/", methods=["GET", "POST"])
+def index():
+    data = None
+    error = None
+
+    if request.method == "POST":
+        city = request.form["city"]
+        url = f"{BASE_URL}?key={API_KEY}&q={city}&aqi=no"
+
+        try:
+            response = requests.get(url)
+            result = response.json()
+
+            if "location" in result and "current" in result:
+                data = result
+            else:
+                error = f"City '{city}' not found. Please try again."
+
+        except Exception as e:
+            error = f"An error occurred: {str(e)}"
+
+    return render_template("index.html", data=data, error=error)
+    '''
 
 @app.route('/data',methods=["GET", "POST"])
 def data():
